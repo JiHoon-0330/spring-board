@@ -2,6 +2,9 @@ package com.board.domain;
 
 import java.util.Date;
 
+import com.drew.lang.annotations.NotNull;
+
+@NotNull
 public class BoardVO {
 	private int bno;
 	private String title;

@@ -45,4 +45,16 @@ public class BoardServiceImpl implements BoardService {
 		dao.delete(bno);
 	}
 
+	@Override
+	public int count() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.count();
+	}
+
+	@Override
+	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listPage(displayPost, postNum);
+	}
+
 }

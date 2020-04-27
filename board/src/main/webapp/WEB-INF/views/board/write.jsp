@@ -11,7 +11,7 @@
 	<div id="nav">
 		<%@ include file="../include/nav.jsp"%>
 	</div>
-	<form method="post">
+	<form method="post" enctype="multipart/form-data">
 		<label>제목</label>
 		<input type="text" name="title" />
 		<br/>
@@ -20,6 +20,8 @@
 		<br/>
 		<label>내용</label>
 		<textarea cols="50" rows="5" name="content"></textarea>
+		<br/>
+		<input type="file" name="filesList" multiple/>
 		<br/>
 		<button type="submit">작성</button>
 	</form>
