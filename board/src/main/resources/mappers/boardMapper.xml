@@ -13,7 +13,7 @@
 	</select>
 	
 	<!-- 게시물 작성 -->
-	<insert id="write" parameterType="com.board.domain.BoardVO">
+	<insert id="write" parameterType="com.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="bno">
 		insert into
 		tbl_board(title, content, writer)
 		values(
@@ -24,10 +24,10 @@
 	
 	<insert id="writeFile" parameterType="hashMap">
 		insert into
-		file_board(GPS, TIME, PATH)
+		file_board(fileBno, gps, timeView, timeSort, path)
 		values
 		<foreach collection="fileVOList" item="item" separator=" , ">
-		(#{item.GPS}, #{item.TIME}, #{item.PATH})
+		(#{item.fileBno}, #{item.gps}, #{item.timeView}, #{item.timeSort}, #{item.path})
 		</foreach>
 	</insert>
 	
@@ -39,6 +39,15 @@
 		tbl_board
 		where
 		bno = #{bno}
+	</select>
+	
+	<select id="viewFile" parameterType="int" resultType="com.board.domain.FileVO" >
+		select
+		gps, timeView, path
+		from
+		file_board
+		where fileBno = #{bno}
+		order by timeSort
 	</select>
 
 	<!-- 게시물 수정 -->

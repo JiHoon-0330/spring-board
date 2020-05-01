@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.board.domain.BoardVO;
+import com.board.domain.FileVO;
 import com.board.domain.Files;
 import com.board.domain.Page;
 import com.board.service.BoardService;
@@ -52,11 +53,11 @@ public class BoardController {
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String postWriter(BoardVO vo, MultipartHttpServletRequest request) throws Exception{
-		service.write(vo);
+		int fileBno = service.write(vo);
 		
 		List<MultipartFile> file = request.getFiles("filesList");
 		
-		fileService.write(file);
+		fileService.write(file, fileBno);
 		
 		
 		return "redirect:/board/list";
@@ -65,7 +66,12 @@ public class BoardController {
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public void getView(@RequestParam("bno") int bno, Model model) throws Exception{
 		BoardVO vo = service.view(bno);
-		model.addAttribute("view", vo);		
+		
+		List<FileVO> list = null;
+		list = fileService.viewFile(bno);
+		
+		model.addAttribute("view", vo);
+		model.addAttribute("list", list);
 	
 	}
 	

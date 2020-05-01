@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.board.dao.FileDAO;
+import com.board.domain.FileVO;
 
 
 
@@ -20,9 +21,15 @@ public class FileServiceImpl implements FileService {
 	private FileDAO dao;
 	
 	@Override
-	public void write(List<MultipartFile> file) throws Exception {
+	public void write(List<MultipartFile> file, int fileBno) throws Exception {
 		// TODO Auto-generated method stub
-		dao.write(file);
+		dao.write(file, fileBno);
+	}
+
+	@Override
+	public List<FileVO> viewFile(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.viewFile(bno);
 	}
 
 }
